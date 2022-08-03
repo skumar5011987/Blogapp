@@ -1,0 +1,64 @@
+{% extends 'foodblogapp/base.html' %}
+{% load static %}
+
+{% block side %}
+<div class="col-sm-2 text-white my-5 text-center">
+    <h5 class="my-2">Profile</h5>
+    {% if full_name %}
+    <h3 class="text-white text-capitalize"><em>{{full_name}}</em></h3>
+    {%else%}
+    <span class="text-white text-capitalize">Profile not set</span>
+    {% endif %}
+    {% for gps in groups %}
+    <p class="text-white">{{gps.name}}</p>
+    {% endfor %}
+</div>
+{% endblock side %}
+
+{% block content %}
+<div class="container col-sm-10">
+    {% block msg %}
+    {% if messages %}
+    {%for message in messages%}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show my-2" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {%endfor%}
+    {%endif%}
+    {% endblock msg %}
+
+    <div class="col-sm-12">
+        <span class="display-6 mx-4">Dashboard</span>
+        <a href="{% url 'add_post' %}" class="btn btn-primary btn-sm col-sm-2 mx-4 float-end">Add New Post</a>
+        <hr class="mb-1 bg-light">
+        {%if posts %}
+        {%for post in posts %}
+        <div class="jumbotron bg-secondary bg-gradient mt-3 rounded px-4 py-2">
+            <h3 class=" strong ">{{post.id}}. &nbsp;{{post.title}}</h3>
+            <p class="strong">Posted by: <em> {{post.author}}</em></p>
+            <p>Date:<em> {{post.date}}</em></p>
+            <p>Location: <em>{{post.location}}</em></p>
+            <strong>Description:</strong>
+            <p class="lead">{{post.description}}</p>
+
+            <a href="{% url 'update_post' post.id %}" class="btn btn-warning btn-sm col-sm-2">Edit</a>
+            {% if perms.foodblogapp.delete_post %}
+            <form action="{% url 'delete_post' post.id %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger btn-sm col-sm-2 mx-3" value="Delete">
+            </form>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-warning alert-dismissible fade show my-2 text-center" role="alert">
+            <strong>You have not posted yet.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock content %}

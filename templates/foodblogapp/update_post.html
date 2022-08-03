@@ -1,0 +1,43 @@
+{% extends 'foodblogapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container col-sm-8">
+    {% block msg %}
+    {% if messages %}
+    {%for message in messages%}
+    <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show my-2" {%endif%}
+        role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {%endfor%}
+    {%endif%}
+    {% endblock msg %}
+
+    <div class="jumbotron bg-gradient rounded-3 px-2 py-2">
+        <form action="" method="post" novalidate>
+            {%csrf_token%}
+            {% if form %}
+            {% for fm in form %}
+            <div class="form-group my-2">
+                {{fm.label_tag}} {{fm}} <small class="text-warning"> {{fm.errors|striptags}}</small>
+            </div>
+            {%endfor%}
+            {%endif%}
+
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}            
+                <div class="alert alert-warning alert-dismissible fade show">
+                    {{error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>            
+            {% endfor%}
+            {% endif %}
+            <input type="submit" class="btn btn-info col-sm-2" value="Update">
+            <a href="{% url 'dashboard' %}" class="btn btn-info text-decoration-none col-sm-2">Back</a>
+        </form>
+    </div>
+
+</div>
+{% endblock content %}

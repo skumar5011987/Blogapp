@@ -1,0 +1,43 @@
+{% extends 'foodblogapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container col-sm-8">
+    {% block msg%}
+        {% if messages %}
+        {%for message in messages%}
+        <div {% if message.tags%} class="alert alert-{{message.tags}} alert-dismissible fade show my-2"
+            {%endif%} role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {%endfor%}
+        {%endif%}
+        {% endblock msg%}
+    <div class="jumbotron shadow p-3 mb-5 rounded mx-3 my-2">
+        <p class="display-6 ">Sign up form</p>
+        <hr class="my-4 bg-light">
+        
+        <form action="" method="post" novalidate class="d-inline">
+            {% csrf_token %}
+            {% for fm in form %}
+            <div class="form-group my-2">
+                {{fm.label_tag}} {{fm}} <small class="text-warning"> {{fm.errors|striptags}}</small>
+            </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-info btn-sm col-sm-3 my-3" value="Sign-up">
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}            
+                <div class="alert alert-warning alert-dismissible fade show">
+                    {{error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>            
+            {% endfor%}
+            {% endif %}
+            <span class="mx-2">One os us?<a href="{%url 'signin' %}" class=" text-info text-decoration-none my-3 ">Sign-in here</a></span>
+        </form>
+    </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'foodblogapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container col-sm-10 my-1">
+    <h1 class="display-6">Contact us</h1>
+    <hr class="my-4">
+    <form> 
+        <div class="row my-2">
+            <div class="col my-3">
+                <label for="first-name">First Name</label>
+                <input type="text" class="form-control bg-secondary" id="firstname" placeholder="First name">
+            </div>
+            <div class="col my-3">
+                <label for="last-name">Last Name</label>
+                <input type="text" class="form-control bg-secondary" id="last-name" placeholder="Last name">
+            </div>
+        </div>
+        <div class="form-group my-3">
+            <label for="exampleFormControlInput1 my-2">Email address</label>
+            <input type="email" class="form-control bg-secondary" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div>
+        <div class="form-group my-3">
+            <label for="exampleFormControlTextarea1 my-2">Example textarea</label>
+            <textarea class="form-control bg-secondary" id="exampleFormControlTextarea1" rows="8"></textarea>
+        </div>
+    </form>
+</div>
+{% endblock content %}
