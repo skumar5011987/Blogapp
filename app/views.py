@@ -26,7 +26,8 @@ def contact(request):
 # Dashbord.
 def dashboard(request):
     if request.user.is_authenticated:
-        posts = Post.objects.filter(uname=request.user)
+        # posts = Post.objects.filter(uname=request.user)
+        posts = Post.objects.all()
         user = request.user
         full_name = user.get_full_name()
         gps = user.groups.all()
