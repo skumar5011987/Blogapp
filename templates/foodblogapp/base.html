@@ -25,6 +25,18 @@
         {% include 'foodblogapp/navbar.html' %}
     </div>
     <div class="container">
+    {% block msg %}
+    {% if messages %}
+    {%for message in messages%}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show my-2" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {%endfor%}
+    {%endif%}
+    {% endblock msg %}
+    </div>
+    <div class="container">
 
         <div class="row">
             {% block side %}

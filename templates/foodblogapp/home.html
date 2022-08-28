@@ -2,25 +2,25 @@
 {% load static %}
 
 {% block content %}
-<div class="container col-sm-10">
+  <div class="container col-sm-10">
     {% if posts %}
-    {% for post in posts %}
-    <div class="jumbotron bg-secondary bg-gradient  rounded">
-        <div class="my-4 mx-4">
-            <h3 class=" strong ">{{post.id}}. &nbsp;{{post.title}}</h3>
-            <hr class="my-2 bg-light">
-            <p>Posted by: {{post.author}}</p>
-            <p>Date: {{post.date}}</p>
-            <p>Location: {{post.location}}</p>
+      {% for post in posts %}
+        <div class="jumbotron bg-secondary bg-gradient rounded">
+          <div class="my-4 mx-4">
+            <h3 class="strong">{{ post.id }}. &nbsp;{{ post.title }}</h3>
+            <hr class="my-2 bg-light" />
+            <p>Posted by: {{ post.author }}</p>
+            <p>Date: {{ post.date }}</p>
+            <p>Location: {{ post.location }}</p>
             <strong>Description:</strong>
-            <p class="lead">{{post.description}}</p>
+            <p class="lead">{{ post.description }}</p>
+          </div>
         </div>
-    </div>
-    {%endfor%}
-    {%else%}
-    <div class="jumbotron bg-gradient bg-secondary rounded">
-        <p class="display-6"> Soory!!!! No post available</p>
-    </div>
-    {%endif%}
-</div>
-{% endblock content %}
+      {% endfor %}
+    {% else %}
+      <div class="jumbotron bg-gradient bg-secondary rounded">
+        <p class="display-6">Soory!!!! No post available</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

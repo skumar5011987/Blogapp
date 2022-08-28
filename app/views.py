@@ -68,12 +68,12 @@ def signin(request):
                 if user is not None:
                     login(request, user)
                     messages.success(request, 'Sign-in successsfully!!!')
-                    return redirect('dashboard')
+                    return redirect('/')
         else:
             form = SigninForm()
             return render(request, 'foodblogapp/signin.html', {'form': form})
     else:
-        return HttpResponseRedirect('/dashboard/')
+        return HttpResponseRedirect('/')
 
     return render(request, 'foodblogapp/signin.html', {'form': form})
 
